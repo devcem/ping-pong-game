@@ -18,7 +18,7 @@ After finishing your work, please send pull request for review.
 ## Todo
 - Add keyboard functionalities for both players, W and S can be one player Up and Down can be for another player.
 - Add players into canvas, make sure we can move players with keyboard.
-- Add ball to the game, pressing SPACE button should start game, make sure ball bounces from boundries.
+- Add ball to the game, pressing ```SPACE``` button should start game, make sure ball bounces from boundries.
 - When player scores, show scoring with console.log. And reset game.
 
 ## Bonus Todo
@@ -27,7 +27,7 @@ After finishing your work, please send pull request for review.
 - Add resize function the engine. With window.resize
 
 ## Notes
-- Make sure game has state functions like reset, start and pause. We should be able to trigger them with app.reset() or app.pause().
+- Make sure game has state functions like reset, start and pause. We should be able to trigger them with ```app.reset()``` or ```app.pause()```.
 - Make sure players or ball uses app.width and app.height values dynamicly, hard coded values will be rejected.
 
 ## Common Coding Mistakes

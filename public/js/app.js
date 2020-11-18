@@ -1,10 +1,20 @@
 var app = {
+	//initial variables
 	canvas  : null,
 	context : null,
+
+	//resizing
 	width   : 800,
 	height  : 400,
+
+	//nodes
 	nodes   : [],
-	timestamp : 0,
+
+	//timing
+	timestamp  : 0,
+	now        : 0,
+	lastUpdate : 0
+
 	init : function(){
 		this.canvas  = document.getElementById('canvas');
 		this.context = this.canvas.getContext('2d');
@@ -22,7 +32,9 @@ var app = {
 		this.context.clearRect(0, 0, this.width, this.height);
 	},
 	update : function(){
-		this.onUpdate(this.timestamp);
+	    var dt = Date.now() - this.lastUpdate;
+
+		this.onUpdate(dt);
 
 		for(var index in this.nodes){
 			var node = this.nodes[index];
@@ -31,7 +43,8 @@ var app = {
 			this.context.fillRect(node.x, node.y, node.width, node.height);
 		}
 
-		this.timestamp++;
+		this.lastUpdate = Date.now();
+		this.timestamp+=dt;
 	},
 	getNode : function(id){
 		for(var index in this.nodes){
