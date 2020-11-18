@@ -33,7 +33,7 @@
 		app.onUpdate = function(time){
 			this.getNode('black-box').y++;
 
-			if(Math.cos(time / 10) > 0){
+			if(Math.cos(this.timestamp / 100) > 0){
 				this.getNode('red-box').direction = -1;
 			}else{
 				this.getNode('red-box').direction = 1;

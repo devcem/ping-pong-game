@@ -13,7 +13,7 @@ var app = {
 	//timing
 	timestamp  : 0,
 	now        : 0,
-	lastUpdate : 0
+	lastUpdate : 0,
 
 	init : function(){
 		this.canvas  = document.getElementById('canvas');
