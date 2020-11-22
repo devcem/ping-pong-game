@@ -11,6 +11,8 @@
 		const blackPlate = 'blac-plate'
 		const ball = 'ball'
 
+		let pause = true
+
 		app.onInit = function(){
 			const plateMargin = this.height/20
 			const plateHeight = this.height/10
@@ -51,11 +53,12 @@
 				if(e.key == 's') app.getNode(redPlate).y += plateVelocity;
 				if(e.key == 'i') app.getNode(blackPlate).y -= plateVelocity;
 				if(e.key == 'k') app.getNode(blackPlate).y += plateVelocity;
-				if(e.keyCode == 32) startGame();
+				if(e.keyCode == 32) pause = !pause;
 			});
 		};
 
 		app.onUpdate = function(time){
+			if(pause) return
 			this.getNode(blackPlate).y++;
 
 			if(Math.cos(this.timestamp / 100) > 0){
