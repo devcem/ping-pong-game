@@ -1,15 +1,11 @@
-const canvas = document.getElementById('canvas')
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
-
 var app = {
 	//initial variables
 	canvas  : null,
 	context : null,
 
 	//resizing
-	width   : canvas.width,
-	height  : canvas.height,
+	width   : 0,
+	height  : 0,
 
 	//nodes
 	nodes   : [],
@@ -22,6 +18,10 @@ var app = {
 	init : function(){
 		this.canvas  = document.getElementById('canvas');
 		this.context = this.canvas.getContext('2d');
+		canvas.width = window.innerWidth
+		canvas.height = window.innerHeight
+		this.width = canvas.width
+		this.height = canvas.height
 
 		this.render();
 		this.onInit();
