@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas')
-canvas.width = window.screen.width
-canvas.height = window.screen.height
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
 
 var app = {
 	//initial variables
