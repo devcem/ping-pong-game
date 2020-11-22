@@ -17,6 +17,7 @@
 			const plateWidth = plateHeight / 5
 
 			const ballSize = plateWidth
+			const plateVelocity = this.height/40
 
 			this.nodes.push({
 				id : redPlate,
@@ -45,7 +46,12 @@
 				height : ballSize,
 				color  : 'purple'
 			});
-
+			window.addEventListener('keypress', function (e) {
+				if(e.key == 'w') app.getNode(redPlate).y -= plateVelocity;
+				if(e.key == 's') app.getNode(redPlate).y += plateVelocity;
+				if(e.key == 'i') app.getNode(blackPlate).y -= plateVelocity;
+				if(e.key == 'k') app.getNode(blackPlate).y += plateVelocity;
+			});
 		};
 
 		app.onUpdate = function(time){
