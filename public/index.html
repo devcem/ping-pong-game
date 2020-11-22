@@ -51,6 +51,7 @@
 				if(e.key == 's') app.getNode(redPlate).y += plateVelocity;
 				if(e.key == 'i') app.getNode(blackPlate).y -= plateVelocity;
 				if(e.key == 'k') app.getNode(blackPlate).y += plateVelocity;
+				if(e.keyCode == 32) startGame();
 			});
 		};
 
@@ -65,6 +66,10 @@
 
 			this.getNode(redPlate).x+=this.getNode(redPlate).direction;
 		};
+
+		function startGame() {
+			console.log('start game')
+		}
 	</script>
 </body>
 </html>
