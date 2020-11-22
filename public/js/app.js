@@ -1,11 +1,15 @@
+const canvas = document.getElementById('canvas')
+canvas.width = window.screen.width
+canvas.height = window.screen.height
+
 var app = {
 	//initial variables
 	canvas  : null,
 	context : null,
 
 	//resizing
-	width   : 800,
-	height  : 400,
+	width   : canvas.width,
+	height  : canvas.height,
 
 	//nodes
 	nodes   : [],
