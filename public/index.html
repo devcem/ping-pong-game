@@ -7,9 +7,11 @@
 	<canvas id="canvas"></canvas>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript">
-		//Sample functions, remove these functions and design ping-pong game with onInit and onUpdate.
-
 		app.onInit = function(){
+			const plateMargin = this.height/20
+			const plateHeight = this.height/10
+			const plateWidth = plateHeight / 5
+
 			this.nodes.push({
 				id : 'red-box',
 				x  : 100,
