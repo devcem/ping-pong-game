@@ -12,6 +12,10 @@
 		const ball = 'ball'
 
 		let pause = true
+		let plateSpeed
+		let ballSpeed
+		let ballXVelocity
+		let ballYVelocity
 
 		app.onInit = function(){
 			const plateMargin = this.height/20
@@ -19,7 +23,11 @@
 			const plateWidth = plateHeight / 5
 
 			const ballSize = plateWidth
-			const plateVelocity = this.height/40
+
+			plateSpeed = app.height/40
+			ballSpeed = plateSpeed / 2
+			ballXVelocity = 1
+			ballYVelocity = 0.1
 
 			this.nodes.push({
 				id : redPlate,
@@ -49,17 +57,19 @@
 				color  : 'purple'
 			});
 			window.addEventListener('keypress', function (e) {
-				if(e.key == 'w') app.getNode(redPlate).y -= plateVelocity;
-				if(e.key == 's') app.getNode(redPlate).y += plateVelocity;
-				if(e.key == 'i') app.getNode(blackPlate).y -= plateVelocity;
-				if(e.key == 'k') app.getNode(blackPlate).y += plateVelocity;
+				if(e.key == 'w') app.getNode(redPlate).y -= plateSpeed;
+				if(e.key == 's') app.getNode(redPlate).y += plateSpeed;
+				if(e.key == 'i') app.getNode(blackPlate).y -= plateSpeed;
+				if(e.key == 'k') app.getNode(blackPlate).y += plateSpeed;
 				if(e.keyCode == 32) pause = !pause;
 			});
 		};
 
 		app.onUpdate = function(time){
 			if(pause) return
-			this.getNode(blackPlate).y++;
+			this.getNode(ball).x += ballXVelocity * ballSpeed
+			this.getNode(ball).y += ballYVelocity * ballSpeed
+
 
 			if(Math.cos(this.timestamp / 100) > 0){
 				this.getNode(redPlate).direction = -1;
