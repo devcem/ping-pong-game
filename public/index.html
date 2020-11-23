@@ -17,6 +17,9 @@
 		let ballXVelocity
 		let ballYVelocity
 
+		let blackScore = 0
+		let redScore = 0
+
 		app.onInit = function(){
 			window.addEventListener('keydown', function (e) {
 				if(e.key == 'w') app.getNode(redPlate).y -= plateSpeed;
@@ -90,7 +93,6 @@
 		}
 
 		function handleCollision() {
-			handleWinConditions()
 			handleBallEdgeBounce()
 			
 			for(const node of app.nodes) {
@@ -101,6 +103,7 @@
 					changeBallYVelocity()
 				}
 			}
+			handleWinConditions()
 		}
 
 		function handleBallEdgeBounce() {
@@ -109,8 +112,16 @@
 		}
 
 		function handleWinConditions() {
-			if(app.getNode(ball).x <= 0) console.log('black win')
-			if(app.getNode(ball).x + app.getNode(ball).width >= app.width) console.log('red win')
+			if(app.getNode(ball).x <= 0) {
+				app.onReset()
+				blackScore += 1
+				console.log('Black Won. Score: ' + blackScore)
+			}
+			if(app.getNode(ball).x + app.getNode(ball).width >= app.width) {
+				app.onReset()
+				redScore += 1
+				console.log('Red Won. Score: ' + redScore)
+			}
 		}
 
 		function handleEdgeCollision(rect) {
