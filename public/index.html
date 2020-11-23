@@ -18,6 +18,28 @@
 		let ballYVelocity
 
 		app.onInit = function(){
+			window.addEventListener('keydown', function (e) {
+				if(e.key == 'w') app.getNode(redPlate).y -= plateSpeed;
+				if(e.key == 's') app.getNode(redPlate).y += plateSpeed;
+				if(e.key == 'i') app.getNode(blackPlate).y -= plateSpeed;
+				if(e.key == 'k') app.getNode(blackPlate).y += plateSpeed;
+				if(e.key == 'r') app.onReset();
+				if(e.keyCode == 32) pause = !pause;
+			});
+			app.onReset()
+		};
+
+		app.onUpdate = function(time){
+			if(pause) return
+			this.getNode(ball).x += ballXVelocity * ballSpeed
+			this.getNode(ball).y += ballYVelocity * ballSpeed
+			handleCollision()
+		};
+
+		app.onReset = function(){
+			app.nodes = []
+			pause = true
+
 			const plateMargin = this.height/20
 			const plateHeight = this.height/10
 			const plateWidth = plateHeight / 5
@@ -57,21 +79,7 @@
 				height : ballSize,
 				color  : 'purple'
 			});
-			window.addEventListener('keypress', function (e) {
-				if(e.key == 'w') app.getNode(redPlate).y -= plateSpeed;
-				if(e.key == 's') app.getNode(redPlate).y += plateSpeed;
-				if(e.key == 'i') app.getNode(blackPlate).y -= plateSpeed;
-				if(e.key == 'k') app.getNode(blackPlate).y += plateSpeed;
-				if(e.keyCode == 32) pause = !pause;
-			});
-		};
-
-		app.onUpdate = function(time){
-			if(pause) return
-			this.getNode(ball).x += ballXVelocity * ballSpeed
-			this.getNode(ball).y += ballYVelocity * ballSpeed
-			handleCollision()
-		};
+		}
 
 		function changeBallYVelocity() {
 			ballYVelocity += randomNumber(-0.3, 0.3)

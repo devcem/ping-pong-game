@@ -64,7 +64,8 @@ var app = {
 
 	//events
 	onInit   : function(){},
-	onUpdate : function(){}
+	onUpdate : function(){},
+	onReset : function(){}
 };
 
 window.onload = function(){
