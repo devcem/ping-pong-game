@@ -26,7 +26,7 @@
 
 			plateSpeed = app.height/40
 			ballSpeed = plateSpeed / 2
-			ballXVelocity = 1
+			ballXVelocity = Math.random() > 0.5 ? -1 : 1
 			ballYVelocity = 0
 			changeBallYVelocity()
 
