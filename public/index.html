@@ -90,8 +90,7 @@
 		}
 
 		function handleCollision() {
-			if(app.getNode(ball).x <= 0) console.log('black win')
-			if(app.getNode(ball).x + app.getNode(ball).width >= app.width) console.log('red win')
+			handleWinConditions()
 			
 			for(const node of app.nodes) {
 				handleEdgeCollision(node)
@@ -101,6 +100,11 @@
 					changeBallYVelocity()
 				}
 			}
+		}
+
+		function handleWinConditions() {
+			if(app.getNode(ball).x <= 0) console.log('black win')
+			if(app.getNode(ball).x + app.getNode(ball).width >= app.width) console.log('red win')
 		}
 
 		function handleEdgeCollision(rect) {
