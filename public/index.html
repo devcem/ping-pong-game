@@ -69,7 +69,11 @@
 			if(pause) return
 			this.getNode(ball).x += ballXVelocity * ballSpeed
 			this.getNode(ball).y += ballYVelocity * ballSpeed
+			handleCollision()
 
+		function handleCollision() {
+			if(app.getNode(ball).x <= 0) console.log('black win')
+			if(app.getNode(ball).x + app.getNode(ball).width >= app.width) console.log('red win')
 
 			if(Math.cos(this.timestamp / 100) > 0){
 				this.getNode(redPlate).direction = -1;
@@ -79,6 +83,7 @@
 
 			this.getNode(redPlate).x+=this.getNode(redPlate).direction;
 		};
+		}
 
 		function detectCollision(rect1, rect2) {
 			if (rect1.x < rect2.x + rect2.width &&
