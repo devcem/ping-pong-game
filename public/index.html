@@ -6,42 +6,39 @@
 <body style="margin: 0;">
 	<canvas id="canvas"></canvas>
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/gameState.js"></script>
 	<script type="text/javascript">
+		window.onload = function(){
+			app.init();
+			gameState.init();
+		};
+
 		const redPlate = 'red-plate'
 		const blackPlate = 'blac-plate'
 		const ball = 'ball'
 
-		let pause = true
-		let plateSpeed
-		let ballSpeed
-		let ballXVelocity
-		let ballYVelocity
-
-		let blackScore = 0
-		let redScore = 0
-
 		app.onInit = function(){
 			window.addEventListener('keydown', function (e) {
-				if(e.key == 'w') app.getNode(redPlate).y -= plateSpeed;
-				if(e.key == 's') app.getNode(redPlate).y += plateSpeed;
-				if(e.key == 'i') app.getNode(blackPlate).y -= plateSpeed;
-				if(e.key == 'k') app.getNode(blackPlate).y += plateSpeed;
+				if(e.key == 'w') app.getNode(redPlate).y -= gameState.plateSpeed;
+				if(e.key == 's') app.getNode(redPlate).y += gameState.plateSpeed;
+				if(e.key == 'i') app.getNode(blackPlate).y -= gameState.plateSpeed;
+				if(e.key == 'k') app.getNode(blackPlate).y += gameState.plateSpeed;
 				if(e.key == 'r') app.onReset();
-				if(e.keyCode == 32) pause = !pause;
+				if(e.keyCode == 32) gameState.pause = !gameState.pause;
 			});
 			app.onReset()
 		};
 
 		app.onUpdate = function(time){
-			if(pause) return
-			this.getNode(ball).x += ballXVelocity * ballSpeed
-			this.getNode(ball).y += ballYVelocity * ballSpeed
+			if(gameState.pause) return
+			this.getNode(ball).x += gameState.ballXVelocity * gameState.ballSpeed
+			this.getNode(ball).y += gameState.ballYVelocity * gameState.ballSpeed
 			handleCollision()
 		};
 
 		app.onReset = function(){
 			app.nodes = []
-			pause = true
+			gameState.pause = true
 
 			const plateMargin = this.height/20
 			const plateHeight = this.height/10
@@ -49,10 +46,10 @@
 
 			const ballSize = plateWidth
 
-			plateSpeed = app.height/40
-			ballSpeed = plateSpeed / 2
-			ballXVelocity = Math.random() > 0.5 ? -1 : 1
-			ballYVelocity = 0
+			gameState.plateSpeed = app.height/40
+			gameState.ballSpeed = gameState.plateSpeed / 2
+			gameState.ballXVelocity = Math.random() > 0.5 ? -1 : 1
+			gameState.ballYVelocity = 0
 			changeBallYVelocity()
 
 			this.nodes.push({
@@ -85,7 +82,7 @@
 		}
 
 		function changeBallYVelocity() {
-			ballYVelocity += randomNumber(-0.3, 0.3)
+			gameState.ballYVelocity += randomNumber(-0.3, 0.3)
 		}
 
 		function randomNumber(min, max) {
@@ -99,7 +96,7 @@
 				handleEdgeCollision(node)
 				if(node.id == ball) continue
 				if(detectCollision(node, app.getNode(ball))) {
-					ballXVelocity *= -1
+					gameState.ballXVelocity *= -1
 					changeBallYVelocity()
 				}
 			}
@@ -107,20 +104,20 @@
 		}
 
 		function handleBallEdgeBounce() {
-			if(app.getNode(ball).y <= 0) ballYVelocity *= -1
-			if(app.getNode(ball).y + app.getNode(ball).width >= app.height) ballYVelocity *= -1
+			if(app.getNode(ball).y <= 0) gameState.ballYVelocity *= -1
+			if(app.getNode(ball).y + app.getNode(ball).width >= app.height) gameState.ballYVelocity *= -1
 		}
 
 		function handleWinConditions() {
 			if(app.getNode(ball).x <= 0) {
 				app.onReset()
-				blackScore += 1
-				console.log('Black Won. Score: ' + blackScore)
+				gameState.blackScore += 1
+				console.log('Black Won. Score: ' + gameState.blackScore)
 			}
 			if(app.getNode(ball).x + app.getNode(ball).width >= app.width) {
 				app.onReset()
-				redScore += 1
-				console.log('Red Won. Score: ' + redScore)
+				gameState.redScore += 1
+				console.log('Red Won. Score: ' + gameState.redScore)
 			}
 		}
 

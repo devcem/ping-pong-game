@@ -67,7 +67,3 @@ var app = {
 	onUpdate : function(){},
 	onReset : function(){}
 };
-
-window.onload = function(){
-	app.init();
-};
