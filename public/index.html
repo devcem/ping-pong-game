@@ -70,19 +70,24 @@
 			this.getNode(ball).x += ballXVelocity * ballSpeed
 			this.getNode(ball).y += ballYVelocity * ballSpeed
 			handleCollision()
+		};
 
 		function handleCollision() {
 			if(app.getNode(ball).x <= 0) console.log('black win')
 			if(app.getNode(ball).x + app.getNode(ball).width >= app.width) console.log('red win')
+			
+			for(const node of app.nodes) {
+				if(node.x <= 0) node.x = 0
+				if(node.y <= 0) node.y = 0
+				if(node.x + node.width >= app.width) node.x = app.width - node.width
+				if(node.y + node.height >= app.height) node.y = app.height - node.height
 
-			if(Math.cos(this.timestamp / 100) > 0){
-				this.getNode(redPlate).direction = -1;
-			}else{
-				this.getNode(redPlate).direction = 1;
+				if(node.id == ball) continue
+
+				if(detectCollision(node, app.getNode(ball))) {
+					ballXVelocity *= -1
+				}
 			}
-
-			this.getNode(redPlate).x+=this.getNode(redPlate).direction;
-		};
 		}
 
 		function detectCollision(rect1, rect2) {
