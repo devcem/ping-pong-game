@@ -77,10 +77,7 @@
 			if(app.getNode(ball).x + app.getNode(ball).width >= app.width) console.log('red win')
 			
 			for(const node of app.nodes) {
-				if(node.x <= 0) node.x = 0
-				if(node.y <= 0) node.y = 0
-				if(node.x + node.width >= app.width) node.x = app.width - node.width
-				if(node.y + node.height >= app.height) node.y = app.height - node.height
+				handleEdgeCollision(node)
 
 				if(node.id == ball) continue
 
@@ -88,6 +85,13 @@
 					ballXVelocity *= -1
 				}
 			}
+		}
+
+		function handleEdgeCollision(rect) {
+			if(rect.x <= 0) rect.x = 0
+			if(rect.y <= 0) rect.y = 0
+			if(rect.x + rect.width >= app.width) rect.x = app.width - rect.width
+			if(rect.y + rect.height >= app.height) rect.y = app.height - rect.height
 		}
 
 		function detectCollision(rect1, rect2) {
