@@ -27,7 +27,9 @@
 			plateSpeed = app.height/40
 			ballSpeed = plateSpeed / 2
 			ballXVelocity = 1
-			ballYVelocity = 0.1
+			ballYVelocity = 0
+			changeBallYVelocity()
+
 
 			this.nodes.push({
 				id : redPlate,
@@ -72,17 +74,24 @@
 			handleCollision()
 		};
 
+		function changeBallYVelocity() {
+			ballYVelocity += randomNumber(-0.3, 0.3)
+		}
+
+		function randomNumber(min, max) {
+  			return Math.random() * (max - min) + min;
+		}
+
 		function handleCollision() {
 			if(app.getNode(ball).x <= 0) console.log('black win')
 			if(app.getNode(ball).x + app.getNode(ball).width >= app.width) console.log('red win')
 			
 			for(const node of app.nodes) {
 				handleEdgeCollision(node)
-
 				if(node.id == ball) continue
-
 				if(detectCollision(node, app.getNode(ball))) {
 					ballXVelocity *= -1
+					changeBallYVelocity()
 				}
 			}
 		}
