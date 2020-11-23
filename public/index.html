@@ -91,6 +91,7 @@
 
 		function handleCollision() {
 			handleWinConditions()
+			handleBallEdgeBounce()
 			
 			for(const node of app.nodes) {
 				handleEdgeCollision(node)
@@ -100,6 +101,11 @@
 					changeBallYVelocity()
 				}
 			}
+		}
+
+		function handleBallEdgeBounce() {
+			if(app.getNode(ball).y <= 0) ballYVelocity *= -1
+			if(app.getNode(ball).y + app.getNode(ball).width >= app.height) ballYVelocity *= -1
 		}
 
 		function handleWinConditions() {
