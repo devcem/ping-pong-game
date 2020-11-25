@@ -29,9 +29,3 @@ After finishing your work, please send pull request for review.
 ## Notes
 - Make sure game has state functions like reset, start and pause. We should be able to trigger them with ```app.reset()``` or ```app.pause()```.
 - Make sure players or ball uses app.width and app.height values dynamicly, hard coded values will be rejected.
-
-## Common Coding Mistakes
-- Avoid using while loop.
-- Long PR, an ideal PR size is between 5-10 commits.
-- Use early breaks instead of if/else.
-- Break down your commits into the smallest commit that represents a cohesive feature that is in a build-able state.
