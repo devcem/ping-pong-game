@@ -32,7 +32,8 @@ var app = {
 		this.context.clearRect(0, 0, this.width, this.height);
 	},
 	update : function(){
-	    var dt = Date.now() - this.lastUpdate;
+		var nextUpdateTime = Date.now();
+	    var dt = nextUpdateTime - this.lastUpdate;
 
 		this.onUpdate(dt);
 
@@ -43,7 +44,7 @@ var app = {
 			this.context.fillRect(node.x, node.y, node.width, node.height);
 		}
 
-		this.lastUpdate = Date.now();
+		this.lastUpdate = nextUpdateTime;
 		this.timestamp+=dt;
 	},
 	getNode : function(id){
